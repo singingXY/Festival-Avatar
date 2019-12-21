@@ -26,13 +26,31 @@
       <img :src="saveImgUrl" alt=""
     /></van-popup>
 
-    <div class="btn-bar">
-      <van-button color="#f44336" @click="saveImg"
-        >保存</van-button
+    <div class="btn-bar" v-show="showBtnBar">
+      <van-button
+        icon="/img/save.png"
+        color="#212121"
+        @click="saveImg"
+      ></van-button
       ><van-button
-        icon="replay"
-        color="#f44336"
+        icon="/img/reset.png"
+        color="#212121"
         @click="reset"
+      ></van-button>
+      <van-button
+        icon="/img/lock.png"
+        color="#212121"
+        @click="lockObj"
+      ></van-button>
+      <van-button
+        icon="/img/jiesuo.png"
+        color="#212121"
+        @click="unlockObj"
+      ></van-button>
+      <van-button
+        icon="/img/remove.png"
+        color="#212121"
+        @click="removeObj"
       ></van-button>
     </div>
     <van-tabs class="pic-list">
@@ -155,6 +173,7 @@ export default {
       Uploaded: false,
       saveShow: false,
       saveImgUrl: '',
+      showBtnBar: false,
     }
   },
   mounted() {
@@ -172,6 +191,7 @@ export default {
     initCanvas() {
       this.canvas = new fabric.Canvas('canvas', {
         backgroundColor: '#eee',
+        preserveObjectStacking: true, //选中项保持层级,否则置顶
         devicePixelRatio: true, //Retina 高清屏 屏幕支持
       })
       if (this.canvasWidth < this.canvasHeight) {
@@ -226,6 +246,7 @@ export default {
       })
       //隐藏上传按钮
       this.uploadImgBtn = false
+      this.showBtnBar = true
     },
     addImg(el) {
       if (!this.Uploaded) {
@@ -254,21 +275,53 @@ export default {
     },
     reset() {
       var obj = this.canvas.getObjects()
-      console.log(obj)
-
       for (var i = 0; i < obj.length; i++) {
         this.canvas.remove(obj[i])
       }
-      this.canvas.renderAll()
+      //this.canvas.clear()
+      this.Uploaded = false
       this.uploadImgBtn = true
+      this.showBtnBar = false
     },
-    saveImg() {
-      if (!this.Uploaded) {
-        Notify('先开始制作再保存吧(oﾟvﾟ)ノ')
+    lockObj() {
+      let obj = this.canvas.getActiveObject()
+      if (!obj) {
+        Notify('先选一个要锁定的图片啦╰(￣ω￣ｏ)')
         return false
       }
+      obj.lockMovementX = true
+      obj.lockMovementY = true
+      obj.lockRotation = true
+      obj.lockScalingX = true
+      obj.lockScalingY = true
+      obj.hasControls = false
+      this.canvas.renderAll()
+    },
+    unlockObj() {
+      let obj = this.canvas.getActiveObject()
+      if (!obj) {
+        Notify('╰(￣ω￣ｏ)先选一个要解锁的图片啦')
+        return false
+      }
+      obj.lockMovementX = false
+      obj.lockMovementY = false
+      obj.lockRotation = false
+      obj.lockScalingX = false
+      obj.lockScalingY = false
+      obj.hasControls = true
+      this.canvas.renderAll()
+    },
+    removeObj() {
+      let obj = this.canvas.getActiveObject()
+      if (!obj) {
+        Notify('先选一个要删掉的图片啦╰(￣ω￣ｏ)')
+        return false
+      }
+      this.canvas.remove(obj)
+    },
+    saveImg() {
       const dataURL = this.canvas.toDataURL({
-        format: 'jpeg', // jpeg或png
+        format: 'png', // jpeg或png
       })
       this.saveImgUrl = dataURL
       this.saveShow = true
@@ -302,21 +355,21 @@ export default {
   margin: 0 auto 10px;
 }
 .btn-bar button {
-  margin: 0 10px;
+  margin: 0 5px;
 }
 .pic-list {
   margin-top: 1rem;
 }
 .pic-list .van-grid-item__content {
   padding: 8px;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 .pic-list img {
   max-width: 100%;
   max-height: 100%;
 }
 .van-tabs__content {
-  height: 200px;
+  height: 15rem;
   overflow: auto;
   padding-top: 10px;
 }

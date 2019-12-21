@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h3>节日头像生成器</h3>
     <HelloWorld />
   </div>
 </template>
