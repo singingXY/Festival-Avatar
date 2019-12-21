@@ -35,7 +35,11 @@
       ></van-button>
     </div>
     <van-tabs class="pic-list">
-      <van-tab title="圣诞">
+      <van-tab
+        :title="tabs"
+        v-for="tabs in tab"
+        :key="tabs"
+      >
         <van-grid
           :column-num="5"
           :gutter="10"
@@ -44,25 +48,7 @@
         >
           <van-grid-item
             v-for="(imgUrl, index) in material"
-            :key="'圣诞' + index"
-            ><img
-              id="my-image"
-              :src="imgUrl"
-              @click="addImg"
-            />
-          </van-grid-item>
-        </van-grid>
-      </van-tab>
-      <van-tab title="新年">
-        <van-grid
-          :column-num="5"
-          :gutter="10"
-          :clickable="true"
-          :square="true"
-        >
-          <van-grid-item
-            v-for="(imgUrl, index) in material"
-            :key="index"
+            :key="tabs + index"
             ><img
               id="my-image"
               :src="imgUrl"
@@ -113,6 +99,7 @@ export default {
         '/img/5.png',
         '/img/5.png',
       ],
+      tab: ['圣诞', '新年'],
       uploadImgBtn: true,
       Uploaded: false,
       saveShow: false,
@@ -191,7 +178,7 @@ export default {
     },
     addImg(el) {
       if (!this.Uploaded) {
-        alert('请上传图片')
+        Notify('请先上传图片噢(oﾟvﾟ)ノ')
         return false
       }
       const imgInstance = new fabric.Image(el.target, {
@@ -226,7 +213,7 @@ export default {
     },
     saveImg() {
       if (!this.Uploaded) {
-        alert('请上传图片')
+        Notify('先开始制作再保存吧(oﾟvﾟ)ノ')
         return false
       }
       const dataURL = this.canvas.toDataURL({
