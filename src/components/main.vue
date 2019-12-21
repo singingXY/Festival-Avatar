@@ -331,7 +331,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 .uploader {
   position: absolute;
   top: 30%;
@@ -343,14 +343,15 @@ export default {
   width: 180px;
 }
 .save-popup {
+  max-height: 90%;
   padding: 1rem 0;
   text-align: center;
 }
 .save-popup img {
-  width: 90%;
+  max-width: 90%;
+  max-height: 90%;
 }
-</style>
-<style>
+
 .canvas-container {
   margin: 0 auto 10px;
 }
@@ -368,10 +369,16 @@ export default {
   max-width: 100%;
   max-height: 100%;
 }
+.van-tabs__nav {
+  max-width: 700px;
+  margin: 0 auto;
+}
 .van-tabs__content {
   height: 15rem;
+  max-width: 700px;
   overflow: auto;
   padding-top: 10px;
+  margin: 0 auto;
 }
 .van-grid-item__content--surround::after {
   border-radius: 20px;

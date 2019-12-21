@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <h3>节日头像生成器</h3>
-    <HelloWorld />
+    <Main />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Main from './components/main.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld,
+    Main,
   },
 }
 </script>
