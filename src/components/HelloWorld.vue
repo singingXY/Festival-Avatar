@@ -11,6 +11,7 @@
     >
       <van-button
         class="uploader-btn"
+        plain
         icon="photo"
         color="#222"
         >上传图片</van-button
@@ -36,9 +37,9 @@
     </div>
     <van-tabs class="pic-list">
       <van-tab
-        :title="tabs"
-        v-for="tabs in tab"
-        :key="tabs"
+        :title="tab.title"
+        v-for="tab in material"
+        :key="tab.title"
       >
         <van-grid
           :column-num="5"
@@ -47,8 +48,8 @@
           :square="true"
         >
           <van-grid-item
-            v-for="(imgUrl, index) in material"
-            :key="tabs + index"
+            v-for="(imgUrl, index) in tab.img"
+            :key="tab.title + index"
             ><img
               id="my-image"
               :src="imgUrl"
@@ -90,16 +91,66 @@ export default {
     return {
       canvas: null,
       material: [
-        '/img/1.png',
-        '/img/2.png',
-        '/img/3.png',
-        '/img/4.png',
-        '/img/5.png',
-        '/img/5.png',
-        '/img/5.png',
-        '/img/5.png',
+        {
+          title: '圣诞',
+          img: [
+            '/img/christmes/1.png',
+            '/img/christmes/2.png',
+            '/img/christmes/3.png',
+            '/img/christmes/4.png',
+            '/img/christmes/5.png',
+            '/img/christmes/6.png',
+            '/img/christmes/7.png',
+            '/img/christmes/8.png',
+            '/img/christmes/9.png',
+            '/img/christmes/10.png',
+            '/img/christmes/11.png',
+            '/img/christmes/12.png',
+            '/img/christmes/13.png',
+            '/img/christmes/14.png',
+            '/img/christmes/15.png',
+            '/img/christmes/16.png',
+            '/img/christmes/17.png',
+            '/img/christmes/18.png',
+            '/img/christmes/19.png',
+            '/img/christmes/20.png',
+            '/img/christmes/21.png',
+            '/img/christmes/22.png',
+            '/img/christmes/23.png',
+            '/img/christmes/24.png',
+            '/img/christmes/25.png',
+            '/img/christmes/26.png',
+            '/img/christmes/27.png',
+          ],
+        },
+        {
+          title: '新年',
+          img: [
+            '/img/newyear/1.png',
+            '/img/newyear/2.png',
+            '/img/newyear/3.png',
+            '/img/newyear/4.png',
+            '/img/newyear/5.png',
+            '/img/newyear/6.png',
+            '/img/newyear/7.png',
+            '/img/newyear/8.png',
+            '/img/newyear/9.png',
+            '/img/newyear/10.png',
+            '/img/newyear/11.png',
+            '/img/newyear/12.png',
+            '/img/newyear/13.png',
+            '/img/newyear/14.png',
+            '/img/newyear/15.png',
+            '/img/newyear/16.png',
+            '/img/newyear/17.png',
+            '/img/newyear/18.png',
+            '/img/newyear/19.png',
+            '/img/newyear/20.png',
+            '/img/newyear/21.png',
+            '/img/newyear/22.png',
+          ],
+        },
       ],
-      tab: ['圣诞', '新年'],
       uploadImgBtn: true,
       Uploaded: false,
       saveShow: false,
@@ -261,9 +312,12 @@ export default {
   border-radius: 20px;
 }
 .pic-list img {
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
 }
 .van-tabs__content {
+  height: 200px;
+  overflow: auto;
   padding-top: 10px;
 }
 .van-grid-item__content--surround::after {
