@@ -3,20 +3,37 @@
     <div class="canvas-warp">
       <canvas id="canvas" ref="canvas"></canvas>
     </div>
-    <label
-      for="uploadImg"
-      class="upload-btn"
+    <van-uploader
+      class="uploader"
+      :after-read="onChange"
       v-show="uploadImgBtn"
-      ><input
-        type="file"
-        id="uploadImg"
-        @change="onChange"
-        accept="image/*;capture=camera"
-        ref="input"
-      />上传图片</label
+      image-fit="cover"
     >
-    <van-button round type="info">圆形按钮</van-button>
-    <div class="bar"></div>
+      <van-button
+        class="uploader-btn"
+        icon="photo"
+        color="#222"
+        >上传图片</van-button
+      >
+    </van-uploader>
+    <van-popup
+      class="save-popup"
+      v-model="saveShow"
+      closeable
+      :style="{ width: '80%' }"
+      >长按或右键保存图片！<br /><br />
+      <img :src="saveImgUrl" alt=""
+    /></van-popup>
+
+    <div class="btn-bar">
+      <van-button type="info" @click="saveImg"
+        >保存</van-button
+      ><van-button
+        icon="replay"
+        type="info"
+        @click="reset"
+      ></van-button>
+    </div>
     <ul>
       <li v-for="(imgUrl, index) in material" :key="index">
         <img id="my-image" :src="imgUrl" @click="addImg" />
@@ -27,12 +44,27 @@
 
 <script>
 import { fabric } from 'fabric'
+import {
+  Button,
+  Popup,
+  Notify,
+  Uploader,
+  Tab,
+  Tabs,
+} from 'vant'
+
 export default {
   name: 'app',
+  components: {
+    [Button.name]: Button,
+    [Popup.name]: Popup,
+    [Uploader.name]: Uploader,
+    [Notify.name]: Notify,
+    [Tab.name]: Tab,
+    [Tabs.name]: Tabs,
+  },
   data() {
     return {
-      elInput: null,
-      imageBase64: '',
       canvas: null,
       material: [
         '/img/1.png',
@@ -43,6 +75,8 @@ export default {
       ],
       uploadImgBtn: true,
       Uploaded: false,
+      saveShow: false,
+      saveImgUrl: '',
     }
   },
   mounted() {
@@ -70,39 +104,53 @@ export default {
         this.canvas.setHeight(this.canvasHeight * 0.8)
       }
     },
-    onChange() {
-      const elInput = this.$refs.input
-      var reader = new FileReader()
-      var that = this
-      reader.onload = function(e) {
-        const src = e.target.result
-        that.imageBase64 = src
-        //获得Base64
-        that.loadImg(that.imageBase64)
-      }
-      if (elInput.files && elInput.files[0]) {
-        reader.readAsDataURL(elInput.files[0])
-      }
+    onChange(file) {
+      //console.log(file)
+      this.Uploaded = true
+      this.loadImg(file.content)
+      //以下用于获取上传图片base64码
+      // var reader = new FileReader()
+      // var that = this
+      // reader.onload = function(e) {
+      //   const src = e.target.result
+      //   that.imageBase64 = src
+      //   //获得Base64
+      //   that.loadImg(that.imageBase64)
+      // }
+      // reader.readAsDataURL(file.files[0])
     },
     loadImg(url) {
       // 设置画布背景
-      fabric.Image.fromURL(url, img => {
-        img.set({
-          // 通过scale来设置图片大小，这里设置和画布一样大
-          scaleX: this.canvas.width / img.width,
-          scaleY: this.canvas.height / img.height,
+      // fabric.Image.fromURL(url, img => {
+      //   img.set({
+      //     scaleX: this.canvas.width / img.width,
+      //     scaleY: this.canvas.width / img.width,
+      //   })
+      //   // 设置背景
+      //   this.canvas.setBackgroundImage(
+      //     img,
+      //     this.canvas.renderAll.bind(this.canvas),
+      //   )
+      // })
+      let that = this
+      fabric.Image.fromURL(url, function(oImg) {
+        oImg.lockRotation = true
+        oImg.set({
+          transparentCorners: false,
+          cornerColor: '#ff110094',
+          borderColor: '#ff110094',
+          cornerSize: 16,
+          cornerStyle: 'circle',
+          borderDashArray: [5, 8],
         })
-        // 设置背景
-        this.canvas.setBackgroundImage(
-          img,
-          this.canvas.renderAll.bind(this.canvas),
-        )
-        //隐藏上传按钮
-        this.uploadImgBtn = false
+        oImg.scale(that.canvas.width / oImg.width)
+        that.canvas.add(oImg)
       })
+      //隐藏上传按钮
+      this.uploadImgBtn = false
     },
     addImg(el) {
-      if (!this.imageBase64) {
+      if (!this.Uploaded) {
         alert('请上传图片')
         return false
       }
@@ -126,10 +174,25 @@ export default {
       this.canvas.add(imgInstance)
       this.canvas.renderAll()
     },
+    reset() {
+      var obj = this.canvas.getObjects()
+      console.log(obj)
+
+      for (var i = 0; i < obj.length; i++) {
+        this.canvas.remove(obj[i])
+      }
+      this.canvas.renderAll()
+    },
     saveImg() {
-      // const dataURL = this.canvas.toDataURL({
-      //   format: 'jpeg', // jpeg或png
-      // })
+      if (!this.Uploaded) {
+        alert('请上传图片')
+        return false
+      }
+      const dataURL = this.canvas.toDataURL({
+        format: 'jpeg', // jpeg或png
+      })
+      this.saveImgUrl = dataURL
+      this.saveShow = true
     },
   },
 }
@@ -137,26 +200,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#uploadImg {
-  display: none;
-}
-.upload-btn {
-  display: block;
+.uploader {
   position: absolute;
   top: 30%;
   left: 50%;
-  width: 200px;
-  margin-left: -100px;
-  line-height: 4;
-  text-align: center;
-  background: #222;
-  color: #fff;
-  font-weight: bold;
-  border-radius: 4rem;
+  width: 180px;
+  margin-left: -90px;
+}
+.uploader-btn {
+  width: 180px;
 }
 ul {
   list-style-type: none;
-  padding: 0;
+  padding: 10px 0;
 }
 li {
   display: inline-block;
@@ -170,9 +226,19 @@ li {
 li img {
   width: 100%;
 }
+.save-popup {
+  padding: 1rem 0;
+  text-align: center;
+}
+.save-popup img {
+  width: 90%;
+}
 </style>
 <style>
 .canvas-container {
-  margin: 0 auto;
+  margin: 0 auto 10px;
+}
+.btn-bar button {
+  margin: 0 10px;
 }
 </style>
