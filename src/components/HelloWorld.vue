@@ -26,19 +26,52 @@
     /></van-popup>
 
     <div class="btn-bar">
-      <van-button type="info" @click="saveImg"
+      <van-button color="#f44336" @click="saveImg"
         >保存</van-button
       ><van-button
         icon="replay"
-        type="info"
+        color="#f44336"
         @click="reset"
       ></van-button>
     </div>
-    <ul>
-      <li v-for="(imgUrl, index) in material" :key="index">
-        <img id="my-image" :src="imgUrl" @click="addImg" />
-      </li>
-    </ul>
+    <van-tabs class="pic-list">
+      <van-tab title="圣诞">
+        <van-grid
+          :column-num="5"
+          :gutter="10"
+          :clickable="true"
+          :square="true"
+        >
+          <van-grid-item
+            v-for="(imgUrl, index) in material"
+            :key="'圣诞' + index"
+            ><img
+              id="my-image"
+              :src="imgUrl"
+              @click="addImg"
+            />
+          </van-grid-item>
+        </van-grid>
+      </van-tab>
+      <van-tab title="新年">
+        <van-grid
+          :column-num="5"
+          :gutter="10"
+          :clickable="true"
+          :square="true"
+        >
+          <van-grid-item
+            v-for="(imgUrl, index) in material"
+            :key="index"
+            ><img
+              id="my-image"
+              :src="imgUrl"
+              @click="addImg"
+            />
+          </van-grid-item>
+        </van-grid>
+      </van-tab>
+    </van-tabs>
   </div>
 </template>
 
@@ -51,6 +84,8 @@ import {
   Uploader,
   Tab,
   Tabs,
+  Grid,
+  GridItem,
 } from 'vant'
 
 export default {
@@ -62,6 +97,8 @@ export default {
     [Notify.name]: Notify,
     [Tab.name]: Tab,
     [Tabs.name]: Tabs,
+    [Grid.name]: Grid,
+    [GridItem.name]: GridItem,
   },
   data() {
     return {
@@ -71,6 +108,9 @@ export default {
         '/img/2.png',
         '/img/3.png',
         '/img/4.png',
+        '/img/5.png',
+        '/img/5.png',
+        '/img/5.png',
         '/img/5.png',
       ],
       uploadImgBtn: true,
@@ -182,6 +222,7 @@ export default {
         this.canvas.remove(obj[i])
       }
       this.canvas.renderAll()
+      this.uploadImgBtn = true
     },
     saveImg() {
       if (!this.Uploaded) {
@@ -210,22 +251,6 @@ export default {
 .uploader-btn {
   width: 180px;
 }
-ul {
-  list-style-type: none;
-  padding: 10px 0;
-}
-li {
-  display: inline-block;
-  width: 15vw;
-  height: 15vw;
-  margin: 0 1vw;
-  padding: 1vw;
-  border: 1px solid #d4d4d4;
-  vertical-align: middle;
-}
-li img {
-  width: 100%;
-}
 .save-popup {
   padding: 1rem 0;
   text-align: center;
@@ -240,5 +265,25 @@ li img {
 }
 .btn-bar button {
   margin: 0 10px;
+}
+.pic-list {
+  margin-top: 1rem;
+}
+.pic-list .van-grid-item__content {
+  padding: 8px;
+  border-radius: 20px;
+}
+.pic-list img {
+  width: 100%;
+}
+.van-tabs__content {
+  padding-top: 10px;
+}
+.van-grid-item__content--surround::after {
+  border-radius: 20px;
+}
+.van-tab--active {
+  color: #f44336;
+  font-weight: 700;
 }
 </style>
