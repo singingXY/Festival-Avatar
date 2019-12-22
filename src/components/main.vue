@@ -28,27 +28,27 @@
 
     <div class="btn-bar" v-show="showBtnBar">
       <van-button
-        icon="/img/save.png"
+        icon="img/save.png"
         color="#212121"
         @click="saveImg"
       ></van-button
       ><van-button
-        icon="/img/reset.png"
+        icon="img/reset.png"
         color="#212121"
         @click="reset"
       ></van-button>
       <van-button
-        icon="/img/lock.png"
+        icon="img/lock.png"
         color="#212121"
         @click="lockObj"
       ></van-button>
       <van-button
-        icon="/img/jiesuo.png"
+        icon="img/jiesuo.png"
         color="#212121"
         @click="unlockObj"
       ></van-button>
       <van-button
-        icon="/img/remove.png"
+        icon="img/remove.png"
         color="#212121"
         @click="removeObj"
       ></van-button>
@@ -112,60 +112,60 @@ export default {
         {
           title: '圣诞',
           img: [
-            '/img/christmes/1.png',
-            '/img/christmes/2.png',
-            '/img/christmes/3.png',
-            '/img/christmes/4.png',
-            '/img/christmes/5.png',
-            '/img/christmes/6.png',
-            '/img/christmes/7.png',
-            '/img/christmes/8.png',
-            '/img/christmes/9.png',
-            '/img/christmes/10.png',
-            '/img/christmes/11.png',
-            '/img/christmes/12.png',
-            '/img/christmes/13.png',
-            '/img/christmes/14.png',
-            '/img/christmes/15.png',
-            '/img/christmes/16.png',
-            '/img/christmes/17.png',
-            '/img/christmes/18.png',
-            '/img/christmes/19.png',
-            '/img/christmes/20.png',
-            '/img/christmes/21.png',
-            '/img/christmes/22.png',
-            '/img/christmes/23.png',
-            '/img/christmes/24.png',
-            '/img/christmes/25.png',
-            '/img/christmes/26.png',
-            '/img/christmes/27.png',
+            'img/christmes/1.png',
+            'img/christmes/2.png',
+            'img/christmes/3.png',
+            'img/christmes/4.png',
+            'img/christmes/5.png',
+            'img/christmes/6.png',
+            'img/christmes/7.png',
+            'img/christmes/8.png',
+            'img/christmes/9.png',
+            'img/christmes/10.png',
+            'img/christmes/11.png',
+            'img/christmes/12.png',
+            'img/christmes/13.png',
+            'img/christmes/14.png',
+            'img/christmes/15.png',
+            'img/christmes/16.png',
+            'img/christmes/17.png',
+            'img/christmes/18.png',
+            'img/christmes/19.png',
+            'img/christmes/20.png',
+            'img/christmes/21.png',
+            'img/christmes/22.png',
+            'img/christmes/23.png',
+            'img/christmes/24.png',
+            'img/christmes/25.png',
+            'img/christmes/26.png',
+            'img/christmes/27.png',
           ],
         },
         {
           title: '新年',
           img: [
-            '/img/newyear/1.png',
-            '/img/newyear/2.png',
-            '/img/newyear/3.png',
-            '/img/newyear/4.png',
-            '/img/newyear/5.png',
-            '/img/newyear/6.png',
-            '/img/newyear/7.png',
-            '/img/newyear/8.png',
-            '/img/newyear/9.png',
-            '/img/newyear/10.png',
-            '/img/newyear/11.png',
-            '/img/newyear/12.png',
-            '/img/newyear/13.png',
-            '/img/newyear/14.png',
-            '/img/newyear/15.png',
-            '/img/newyear/16.png',
-            '/img/newyear/17.png',
-            '/img/newyear/18.png',
-            '/img/newyear/19.png',
-            '/img/newyear/20.png',
-            '/img/newyear/21.png',
-            '/img/newyear/22.png',
+            'img/newyear/1.png',
+            'img/newyear/2.png',
+            'img/newyear/3.png',
+            'img/newyear/4.png',
+            'img/newyear/5.png',
+            'img/newyear/6.png',
+            'img/newyear/7.png',
+            'img/newyear/8.png',
+            'img/newyear/9.png',
+            'img/newyear/10.png',
+            'img/newyear/11.png',
+            'img/newyear/12.png',
+            'img/newyear/13.png',
+            'img/newyear/14.png',
+            'img/newyear/15.png',
+            'img/newyear/16.png',
+            'img/newyear/17.png',
+            'img/newyear/18.png',
+            'img/newyear/19.png',
+            'img/newyear/20.png',
+            'img/newyear/21.png',
+            'img/newyear/22.png',
           ],
         },
       ],
