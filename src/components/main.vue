@@ -206,6 +206,7 @@ export default {
       //console.log(file)
       this.Uploaded = true
       this.loadImg(file.content)
+      this.canvas.backgroundColor = ''
       //以下用于获取上传图片base64码
       // var reader = new FileReader()
       // var that = this
@@ -332,6 +333,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.canvas-warp {
+  max-width: 480px;
+  border: 6px solid #eee;
+  margin: 0 auto 10px;
+}
 .uploader {
   position: absolute;
   top: 30%;
@@ -352,9 +358,6 @@ export default {
   max-height: 90%;
 }
 
-.canvas-container {
-  margin: 0 auto 10px;
-}
 .btn-bar button {
   margin: 0 5px;
 }
