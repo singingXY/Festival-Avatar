@@ -194,7 +194,10 @@ export default {
         preserveObjectStacking: true, //选中项保持层级,否则置顶
         devicePixelRatio: true, //Retina 高清屏 屏幕支持
       })
-      if (this.canvasWidth < this.canvasHeight) {
+      if (this.canvasWidth > 480) {
+        this.canvas.setWidth(480)
+        this.canvas.setHeight(480)
+      } else if (this.canvasWidth < this.canvasHeight) {
         this.canvas.setWidth(this.canvasWidth)
         this.canvas.setHeight(this.canvasWidth)
       } else {
@@ -335,9 +338,13 @@ export default {
 <style>
 .canvas-warp {
   max-width: 480px;
+  max-height: 480px;
+  /* overflow: hidden; */
+  /* background: #eee; */
   border: 6px solid #eee;
   margin: 0 auto 10px;
 }
+
 .uploader {
   position: absolute;
   top: 30%;
