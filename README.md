@@ -1,5 +1,7 @@
 # Festival-Avatar
 
+上传图片在线制作节日头像
+
 ## Project setup
 
 ```
