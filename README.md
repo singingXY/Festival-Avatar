@@ -9,6 +9,7 @@
 ![image](https://raw.githubusercontent.com/singingXY/mypic/master/makeAvatar/2.png)
 
 制作完成后保存
+
 ![image](https://raw.githubusercontent.com/singingXY/mypic/master/makeAvatar/3.png)
 
 ##
