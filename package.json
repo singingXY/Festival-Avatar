@@ -8,16 +8,16 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.4.3",
-    "fabric": "^3.5.1",
-    "vant": "^2.3.0",
+    "core-js": "^3.6.4",
+    "fabric": "^3.6.3",
+    "vant": "^2.5.9",
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.1.0",
-    "@vue/cli-plugin-eslint": "^4.1.0",
-    "@vue/cli-service": "^4.1.0",
-    "babel-eslint": "^10.0.3",
+    "@vue/cli-plugin-babel": "^4.3.0",
+    "@vue/cli-plugin-eslint": "^4.3.0",
+    "@vue/cli-service": "^4.3.0",
+    "babel-eslint": "^10.1.0",
     "babel-plugin-import": "^1.13.0",
     "bufferutil": "^4.0.1",
     "eslint": "^5.16.0",
