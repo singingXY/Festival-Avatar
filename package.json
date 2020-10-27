@@ -1,6 +1,6 @@
 {
   "name": "festival-avatar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -8,22 +8,22 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.6.4",
-    "fabric": "^3.6.3",
-    "vant": "^2.5.9",
-    "vue": "^2.6.10"
+    "core-js": "^3.6.5",
+    "fabric": "^4.2.0",
+    "vant": "^2.10.11",
+    "vue": "^2.6.12"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.3.0",
-    "@vue/cli-plugin-eslint": "^4.3.0",
-    "@vue/cli-service": "^4.3.0",
+    "@vue/cli-plugin-babel": "^4.5.8",
+    "@vue/cli-plugin-eslint": "^4.5.8",
+    "@vue/cli-service": "^4.5.8",
     "babel-eslint": "^10.1.0",
-    "babel-plugin-import": "^1.13.0",
+    "babel-plugin-import": "^1.13.1",
     "bufferutil": "^4.0.1",
-    "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.0.0",
+    "eslint": "^7.12.1",
+    "eslint-plugin-vue": "^7.1.0",
     "utf-8-validate": "^5.0.2",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.12"
   },
   "eslintConfig": {
     "root": true,
